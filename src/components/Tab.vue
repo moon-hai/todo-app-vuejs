@@ -31,5 +31,3 @@ export default {
     border-top: 1px solid #ccc;
   }
 </style>
-
-

@@ -44,11 +44,10 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-  
+
   .tag.is-success {
     margin-bottom: 20px;
     height: 2em;
     font-size: 16px;
   }
 </style>
-
