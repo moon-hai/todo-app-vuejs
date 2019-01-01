@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
-      <p class="tag is-success" v-if="this.flash">Congrat! You've created / edit successfully !!</p>
+      <message v-if="this.flash" :display="this.flash" :content="this.messContent"/>
       <div class="panel">
         <p class="panel-heading">
           todo form
@@ -14,13 +14,16 @@
 
 <script>
 import TodoForm from '../components/TodoForm'
+import message from '../mixins/message'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'todo-form',
+  mixins: [message],
   data() {
     return {
-      id: this.$route.params
+      id: this.$route.params,
+      messContent: "Congrat! You've created / edit successfully !!"
     }
   },
   components: {
