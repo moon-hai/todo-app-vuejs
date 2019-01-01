@@ -19,7 +19,7 @@ const mutations = {
 
 const actions = {
   addTodoItem({ commit }, data) {
-    return axios.post('/item', data)
+    return axios.post('/item', data.params)
                 .then(response => commit(types.ADD_TODO_ITEM, response.data))
                 .catch(err => {
                   throw err
