@@ -12,8 +12,8 @@ const router = new Router({
   linkActiveClass: 'is-active',
   routes: [
     { path: '/', name: 'dashboard', component: Dashboard },
-    { path: '/add', name: 'todo-form', component: TodoForm },
-    { path: '/edit/:id', name: 'todo-form', component: TodoForm },
+    { path: '/add', name: 'add-todo-form', component: TodoForm },
+    { path: '/edit/:id', name: 'edit-todo-form', component: TodoForm },
     { path: '/404', name: 'error-404', component: Error404 },
     { path: '*', redirect: '/404' }
   ]
