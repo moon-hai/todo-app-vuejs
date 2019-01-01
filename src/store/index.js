@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import todoItems from './modules/todo-items'
-import todoItem from './modules/todo-item'
+import message from './modules/message'
 
 Vue.use(Vuex)
 
@@ -10,6 +10,6 @@ export default new Vuex.Store({
   strict: true,
   modules: {
     todoItems,
-    todoItem
+    message
   }
 })
