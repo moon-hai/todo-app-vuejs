@@ -37,9 +37,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('todoItem', ['addTodoItem', 'editTodoItem']),
+    ...mapActions('message', ['setMsg']),
 
     onSubmitForm: function() {
+      // Prevent when form is blank
+      if (!this.params.name || !this.params.descriptions) return
+
       let data = {
         id: this.id || null,
         params: {
@@ -49,12 +52,19 @@ export default {
         }
       }
 
-      // Prevent when form is blank
-      if (!this.params.name || !this.params.descriptions) {
-        alert('Please fill in form before submit!')
+      // This is add form or edit form
+      if (this.id >= 0) {
+        axios.put(`/item/${data.id}`, data.params)
+              .then(response => this.setMsg())
+              .catch(err => { throw err })
       } else {
-        // This is add form or edit form
-        this.id >= 0 ? this.editTodoItem(data) : this.addTodoItem(data)
+        axios.post('/item', data.params)
+             .then(response => {
+                this.setMsg()
+                this.params.name = ''
+                this.params.descriptions = ''
+               })
+             .catch(err => { throw err })
       }
     }
   },

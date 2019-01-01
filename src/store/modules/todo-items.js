@@ -3,8 +3,7 @@ import axios from 'axios'
 
 const state = {
   items: [],
-  todoList: [],
-  flash: false
+  todoList: []
 }
 
 const getters = {
@@ -22,13 +21,11 @@ const mutations = {
     state.todoList = payload
   },
   [types.TOGGLE_STATUS_ITEM](state, payload) {
-    state.flash = true
     const index = state.items.findIndex(item => item.id === payload.id)
     state.items[index].status = payload.status
 
   },
   [types.REMOVE_ITEM](state, todoId) {
-    state.flash = true
     state.items = state.items.filter(item => item.id !== todoId)
     state.todoList = state.items
   },
@@ -40,9 +37,6 @@ const mutations = {
   },
   [types.GET_COMPLETED_ITEMS](state) {
     state.todoList = state.items.filter(item => item.status === true)
-  },
-  [types.RESET_FLASH](state) {
-    state.flash = false
   }
 }
 
@@ -76,9 +70,6 @@ const actions = {
                 .catch(err => {
                   throw err
                 })
-  },
-  resetFlash({ commit }) {
-    commit(types.RESET_FLASH)
   }
 }
 

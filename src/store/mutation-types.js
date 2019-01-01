@@ -6,7 +6,5 @@ export const GET_COMPLETED_ITEMS = 'GET_COMPLETED_ITEM'
 export const TOGGLE_STATUS_ITEM = 'TOGGLE_STATUS_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
 
-export const ADD_TODO_ITEM = 'ADD_TODO_ITEM'
-export const EDIT_TODO_ITEM = 'EDIT_TODO_ITEM'
-
-export const RESET_FLASH = 'RESET_FLASH'
+export const RESET_MESSAGE = 'RESET_MESSAGE'
+export const SET_MESSAGE = 'SET_MESSAGE'
