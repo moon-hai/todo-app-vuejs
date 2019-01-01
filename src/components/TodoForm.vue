@@ -1,14 +1,14 @@
 <template>
   <div class="panel-block">
     <div class="field">
-      <label class="label">Name</label>
+      <label class="label">Name <span class="tag is-danger">require</span></label>
       <div class="control">
         <input class="input" type="text" placeholder="Learn Javacript" v-model="params.name">
       </div>
     </div>
 
     <div class="field">
-      <label class="label">Description</label>
+      <label class="label">Description <span class="tag is-danger">require</span></label>
       <div class="control">
         <input class="input" type="email" placeholder="Today I learn javascript" v-model="params.descriptions">
       </div>
@@ -40,23 +40,21 @@ export default {
     ...mapActions('todoItem', ['addTodoItem', 'editTodoItem']),
 
     onSubmitForm: function() {
-      if (this.id >= 0) {
-        let data = {
-          id: this.id,
-          params: {
-            name: this.params.name,
-            descriptions: this.params.descriptions,
-            status: this.item.status
-          }
-        }
-        this.editTodoItem(data)
-      } else {
-        let data = {
+      let data = {
+        id: this.id || null,
+        params: {
           name: this.params.name,
           descriptions: this.params.descriptions,
-          status: false
+          status: this.item.status || false
         }
-        this.addTodoItem(data)
+      }
+
+      // Prevent when form is blank
+      if (!this.params.name || !this.params.descriptions) {
+        alert('Please fill in form before submit!')
+      } else {
+        // This is add form or edit form
+        this.id >= 0 ? this.editTodoItem(data) : this.addTodoItem(data)
       }
     }
   },
