@@ -1,6 +1,6 @@
 <template>
   <div class="panel-item">
-    <a class="panel-block" @click="toggleDescription" :class="{ 'is-active': !isHidden }">
+    <a class="panel-block" @click="toggleDescription" :class="{ 'is-active': !isHiddenDescription }">
       <p>
         <span class="panel-icon">
           <i class="fas fa-book" aria-hidden="true"></i>
@@ -12,7 +12,7 @@
         v-text="item.status ? 'Pending...' : 'Completed'"
         @click.stop.prevent="toggleStatus(item)"></a>
     </a>
-    <div class="panel-detail" :class="{ 'hidden': isHidden }">
+    <div class="panel-detail" :class="{ 'hidden': isHiddenDescription }">
       <p>{{ item.descriptions }}</p>
       <p class="button-group">
         <router-link :to="`/edit/${item.id}`" class="button is-primary">Edit</router-link>
@@ -30,24 +30,29 @@ export default {
   props: ['item'],
   data() {
     return {
-      isHidden: true
+      isHiddenDescription: true
     }
   },
   methods: {
     ...mapActions('todoItems', ['toggleStatusItem', 'removeToDoItem']),
+    ...mapActions('message', ['setMsg']),
 
     toggleDescription: function() {
-      this.isHidden = !this.isHidden
+      this.isHiddenDescription = !this.isHiddenDescription
     },
     toggleStatus: function(item) {
       let data = {
         id: item.id,
         status: !item.status
       }
-      this.toggleStatusItem(data)
+      this.toggleStatusItem(data).then(response => {
+        this.setMsg()
+      })
     },
     removeItem: function(item) {
-      this.removeToDoItem(item.id)
+      this.removeToDoItem(item.id).then(response => {
+        this.setMsg()
+      })
     }
   }
 }

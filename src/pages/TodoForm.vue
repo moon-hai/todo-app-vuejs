@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
-      <message v-if="this.flash" :display="this.flash" :content="this.messContent"/>
+      <message :display="this.isDisplay" :content="this.messContent"/>
       <div class="panel">
         <p class="panel-heading">
           todo form
@@ -30,13 +30,13 @@ export default {
     TodoForm
   },
   methods: {
-    ...mapActions('todoItem', ['resetFlash'])
+    ...mapActions('message', ['resetMsg'])
   },
   computed: {
-    ...mapState('todoItem', ['flash'])
+    ...mapState('message', ['isDisplay'])
   },
   created() {
-    this.resetFlash()
+    this.resetMsg()
   }
 }
 </script>

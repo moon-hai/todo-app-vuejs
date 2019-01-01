@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
-      <message :display="this.flash" :content="this.messContent"/>
+      <message :display="this.isDisplay" :content="this.messContent"/>
       <nav class="panel">
         <p class="panel-heading">
           todo list
@@ -34,13 +34,13 @@ export default {
     Tab
   },
   computed: {
-    ...mapState('todoItems', ['flash'])
+    ...mapState('message', ['isDisplay'])
   },
   methods: {
-    ...mapActions('todoItems', ['resetFlash'])
+    ...mapActions('message', ['resetMsg'])
   },
   created() {
-    this.resetFlash()
+    this.resetMsg()
   }
 }
 </script>
